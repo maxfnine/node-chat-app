@@ -13,9 +13,29 @@ app.use(express.static(publicPath));
 io.on('connection',(socket)=>{
 console.log('New client connected');
 
+socket.emit('newEmail',{
+    from:'maxfnine@gmail.com',
+    text:'This is a test',
+    createdAt: 1872018
+});
+
+socket.on('createEmail',(data)=>{
+console.log('New Email created',JSON.stringify(data));
+
+});
+
+socket.on('createMessage',(data)=>{
+    console.log('createMessage',JSON.stringify(data,undefined,2));   
+});
+
 socket.on('disconnect', function () {
     console.log('A client disconnected');
  });
+
+
+
+
+
 });
 
 
