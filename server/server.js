@@ -20,17 +20,17 @@ console.log('New Email created',JSON.stringify(data));
 
 socket.on('createMessage',(data)=>{
     console.log('createMessage',JSON.stringify(data,undefined,2));   
+    io.emit('newMessage',{
+        from:data.from,
+        text:data.text,
+        createAt: new Date().getTime()
+
+    });
 });
 
 socket.on('disconnect', function () {
     console.log('A client disconnected');
  });
-
-
-
-
-
- //this is sample change
 });
 
 
