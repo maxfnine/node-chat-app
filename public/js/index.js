@@ -8,7 +8,7 @@ socket.on('disconnect',function(){
 });
 
 socket.on('newEmail',function(data){
-console.log('New Email arrived :',JSON.stringify(data));
+console.log('New Email arrived :',JSON.stringify(data,undefined,2));
 });
 
 socket.on('newMessage',function(data){
