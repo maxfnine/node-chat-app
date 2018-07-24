@@ -16,7 +16,18 @@ socket.on('newMessage', function (data) {
     var li = jQuery(`<li></li>`);
     li.text(`${data.from} : ${data.text}`);
     jQuery('#messages').append(li);
-})
+});
+
+socket.on('newLocationMessage',function(data){
+    var li = jQuery(`<li></li>`);
+    var a = jQuery(`<a target="_blank">My current location</a>`);
+    li.text(`${data.from}: `);
+    a.attr('href',data.url);
+    li.append(a);
+
+    
+    jQuery('#messages').append(li);
+});
 
 jQuery('#message-form').on('submit', function (event) {
     event.preventDefault();
@@ -25,7 +36,6 @@ jQuery('#message-form').on('submit', function (event) {
         text: jQuery('[name=message]').val()
     }, function () {
         console.log('callback called!');
-
     });
 });
 
