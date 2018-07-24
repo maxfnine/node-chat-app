@@ -24,7 +24,6 @@ socket.on('createMessage',(data)=>{
         from:data.from,
         text:data.text,
         createAt: new Date().getTime()
-
     });
 });
 
