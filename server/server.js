@@ -11,7 +11,17 @@ var io = socketIO(server);
 
 app.use(express.static(publicPath));
 io.on('connection',(socket)=>{
-console.log('New client connected');
+socket.emit('newMessage',{
+    from:'Admin',
+    text:'Welcome to the chat app',
+    createAt: new Date().getTime()
+});
+socket.broadcast.emit('newMessage',{
+    from:'Admin',
+    text:'New user joined',
+    createAt: new Date().getTime()
+});
+
 
 socket.on('createEmail',(data)=>{
 console.log('New Email created',JSON.stringify(data));
