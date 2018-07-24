@@ -29,6 +29,10 @@ socket.on('createMessage',(data,callback)=>{
    
 });
 
+socket.on('createLocationMessage',(data)=>{
+io.emit('newMessage',generateMessage('Admin',`${data.latitude} , ${data.longitude}`));
+});
+
 socket.on('disconnect', function () {
     console.log('A client disconnected');
  });
