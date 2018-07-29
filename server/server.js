@@ -40,13 +40,22 @@ socket.on('join',(data,callback)=>{
 });
 
 socket.on('createMessage',(data,callback)=>{
-    console.log('createMessage',JSON.stringify(data,undefined,2));   
-    io.emit('newMessage',generateMessage(data.from,data.text));
+   var user = users.getUser(socket.id);
+   if(user && isRealString(data.text))
+   {
+       io.to(user.room).emit('newMessage',generateMessage(user.name,data.text));
+    
+   }
     callback();
 });
 
 socket.on('createLocationMessage',(data)=>{
-io.emit('newLocationMessage',generateLocationMessage('Admin',data.latitude, data.longitude));
+var user = users.getUser(socket.id);
+if(user)
+{
+    io.to(user.room).emit('newLocationMessage',generateLocationMessage(user.name,data.latitude, data.longitude));
+}
+
 });
 
 socket.on('disconnect', function () {
